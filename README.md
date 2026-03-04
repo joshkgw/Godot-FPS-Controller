@@ -1,6 +1,6 @@
 # Godot FPS Player Controller
 
-A modular, reusable first-person player controller for Godot 4. Built with composition — each system is an independent component that can be extended, replaced, or reused on non-player characters.
+A modular, reusable first-person player controller for Godot 4.
 
 ---
 
