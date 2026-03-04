@@ -145,7 +145,7 @@ The following actions must be defined in `Project Settings → Input Map`:
 | `sprint` | Shift |
 | `walk` | Alt |
 | `crouch` | Ctrl |
-| `interact` | E |
+| `interact` | F |
 | `lean_left` | Q |
 | `lean_right` | E |
 
