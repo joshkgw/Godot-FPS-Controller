@@ -20,6 +20,13 @@ A modular, reusable first-person player controller for Godot 4.
 
 ---
 
+## Requirements
+
+- Godot **4.3** or later
+- Forward+ or Mobile renderer (SubViewport light sampling requires rendering)
+
+---
+
 ## Installation
 
 1. Copy the `addons/fps_controller/` folder into your project's `addons/` directory
@@ -175,10 +182,3 @@ light_detector.entered_shadow.connect(func():
     stealth_mode = true
 )
 ```
-
----
-
-## Requirements
-
-- Godot **4.3** or later
-- Forward+ or Mobile renderer (SubViewport light sampling requires rendering)
