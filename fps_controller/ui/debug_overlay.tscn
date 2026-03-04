@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://c058w7xyao70b"]
+
+[ext_resource type="Script" uid="uid://e82exgob7uqt" path="res://assets/scripts/player/debug_overlay.gd" id="1_wl0fn"]
+
+[node name="DebugOverlay" type="Control" unique_id=113931968]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wl0fn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=702977015]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=786022276]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LabelFPS" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=949074138]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelState" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1846921221]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelSpeed" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1809715980]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelOnFloor" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1625725457]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelLightLevel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=129144917]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelShadow" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=785253230]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelInteractable" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1405997154]
+unique_name_in_owner = true
+layout_mode = 2

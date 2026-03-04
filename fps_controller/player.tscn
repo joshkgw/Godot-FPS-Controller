@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://dlewhv1wr6by3"]
+
+[ext_resource type="Script" uid="uid://cn7qetqe82rmk" path="res://assets/scripts/player/player.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://5kxh753cyg0o" path="res://assets/scripts/movement_component.gd" id="2_dovo2"]
+[ext_resource type="Script" uid="uid://c63s45se3bfgk" path="res://assets/scripts/player/camera_controller.gd" id="2_kai5h"]
+[ext_resource type="Script" uid="uid://c31w3swisby3r" path="res://assets/scripts/player/input_component.gd" id="3_so2s4"]
+[ext_resource type="Script" uid="uid://bjpmu5sklv5h8" path="res://addons/raytraced_audio/raytraced_audio_listener.gd" id="5_dolh7"]
+[ext_resource type="Script" uid="uid://bataips7y302w" path="res://assets/scripts/player/interaction_component.gd" id="5_fjrip"]
+[ext_resource type="Script" uid="uid://bb1it0g5dvfwi" path="res://assets/scripts/player/light_detector_component.gd" id="5_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://c058w7xyao70b" path="res://scenes/debug_overlay.tscn" id="8_smehm"]
+[ext_resource type="PackedScene" uid="uid://2518yffr7vua" path="res://scenes/user_interface.tscn" id="9_ur7pv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8afob"]
+height = 1.8
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dovo2"]
+height = 0.9
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dolh7"]
+height = 0.9
+radius = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjrip"]
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_smehm"]
+material = SubResource("StandardMaterial3D_fjrip")
+radial_segments = 4
+rings = 2
+
+[node name="Player" type="CharacterBody3D" unique_id=1778372227 groups=["Player"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_8afob")
+
+[node name="CameraController" type="Node" parent="." unique_id=902573854]
+unique_name_in_owner = true
+script = ExtResource("2_kai5h")
+
+[node name="InputComponent" type="Node" parent="." unique_id=1315134133]
+unique_name_in_owner = true
+script = ExtResource("3_so2s4")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1093704389]
+unique_name_in_owner = true
+script = ExtResource("2_dovo2")
+
+[node name="InteractionComponent" type="Node" parent="." unique_id=1276586428]
+unique_name_in_owner = true
+script = ExtResource("5_fjrip")
+entity_reach = 15.0
+
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="." unique_id=1496928228]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CylinderShape3D_8afob")
+debug_color = Color(1.353256, 1.353256, 1.353256, 1)
+
+[node name="CrouchingCollisionShape" type="CollisionShape3D" parent="." unique_id=2073588719]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CylinderShape3D_dovo2")
+debug_color = Color(1, 0, 0, 1)
+
+[node name="StandupCheck" type="ShapeCast3D" parent="." unique_id=518858974]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_dolh7")
+target_position = Vector3(0, 0.6, 0)
+debug_shape_custom_color = Color(1, 1, 0, 1)
+
+[node name="LightDetector" type="Node3D" parent="." unique_id=1780456411]
+unique_name_in_owner = true
+script = ExtResource("5_tuyoq")
+
+[node name="SubViewport" type="SubViewport" parent="LightDetector" unique_id=1320258045]
+unique_name_in_owner = true
+size = Vector2i(8, 8)
+render_target_update_mode = 4
+
+[node name="ProbeCamera" type="Camera3D" parent="LightDetector/SubViewport" unique_id=2076311483]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.8, 0)
+projection = 1
+size = 0.5
+near = 0.1
+far = 3.0
+
+[node name="OctahedronMesh" type="MeshInstance3D" parent="LightDetector/SubViewport" unique_id=1985219512]
+unique_name_in_owner = true
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+layers = 524288
+mesh = SubResource("SphereMesh_smehm")
+
+[node name="Timer" type="Timer" parent="LightDetector" unique_id=303990620]
+wait_time = 0.1
+autostart = true
+
+[node name="Head" type="Node3D" parent="." unique_id=263967914]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeanPivot" type="Node3D" parent="Head" unique_id=1747298319]
+unique_name_in_owner = true
+
+[node name="RaytracedAudioListener" type="AudioListener3D" parent="Head/LeanPivot" unique_id=414145177]
+script = ExtResource("5_dolh7")
+metadata/_custom_type_script = "uid://bjpmu5sklv5h8"
+
+[node name="Eyes" type="Node3D" parent="Head/LeanPivot" unique_id=1438755830]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="Head/LeanPivot/Eyes" unique_id=913890737]
+unique_name_in_owner = true
+cull_mask = 524287
+fov = 90.0
+
+[node name="DebugOverlay" parent="." unique_id=113931968 instance=ExtResource("8_smehm")]
+
+[node name="UserInterface" parent="." unique_id=1227509068 instance=ExtResource("9_ur7pv")]
+
+[connection signal="timeout" from="LightDetector/Timer" to="LightDetector" method="_sample_light"]
